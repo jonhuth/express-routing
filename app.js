@@ -58,6 +58,24 @@ app.get("/mode", function(req, res, next) {
   }
 })
 
+app.get("/all", function(req, res, next) {
+  try {
+    let nums = req.query.nums;
+    if (!nums) throw new ExpressError("nums are required", 400);
+    nums = nums.split(',').map(num => +num);
+    if (nums.includes(NaN)) throw new ExpressError("input includes NaN", 400);
+
+    return res.json( {response: {
+      operation: "mode",
+      mean: mean(nums),
+      median: median(nums),
+      mode: mode(nums)
+    }})
+  } catch(err) {
+    return next(err);
+  }
+})
+
 
 
 app.use(function(err, req, res, next) {

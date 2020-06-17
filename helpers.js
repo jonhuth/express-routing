@@ -19,7 +19,7 @@ function mode(nums) {
   let highestCount = 0;
   for (let numKey in counts) {//set mode to key with highest count
     if (counts[numKey] > highestCount) {
-      mode = numKey;
+      mode = +numKey;
       highestCount = counts[numKey];
     }
   }
